@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thiệp Chúc Mừng Đám Cưới</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- AOS Animation CDN -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Confetti CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Great+Vibes&family=Lora:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(to bottom, #fefcbf, #fed7aa);
+            font-family: 'Arial', sans-serif;
+            overflow-x: hidden;
+            position: relative;
+        }
+        /* Floating hearts */
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: red;
+            transform: rotate(-45deg);
+            animation: float 6s infinite;
+            opacity: 0.7;
+        }
+        .heart::before,
+        .heart::after {
+            content: '';
+            width: 20px;
+            height: 20px;
+            background: red;
+            border-radius: 50%;
+            position: absolute;
+        }
+        .heart::before {
+            top: -10px;
+            left: 0;
+        }
+        .heart::after {
+            left: 10px;
+            top: 0;
+        }
+        @keyframes float {
+            0% { transform: translateY(0) rotate(-45deg); opacity: 0.7; }
+            100% { transform: translateY(-800px) rotate(-45deg); opacity: 0; }
+        }
+        /* Vinyl record effect */
+        .vinyl-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+        }
+        .vinyl {
+            width: 100%;
+            height: 100%;
+            background: url('https://drive.google.com/uc?export=view&id=1RLXX0KnXlees55LVTzLrs2rRWCvq3OJc') center/cover no-repeat;
+            border-radius: 50%;
+            position: relative;
+            cursor: pointer;
+            border: 6px solid #333;
+            box-shadow: 0 0 12px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+        .vinyl:hover {
+            transform: scale(1.05);
+        }
+        .vinyl.playing {
+            animation: spin 4s linear infinite;
+            box-shadow: 0 0 25px rgba(255, 105, 180, 0.8);
+        }
+        .vinyl::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 50px;
+            height: 50px;
+            background: #fff;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            border: 2px solid #000;
+        }
+        .vinyl::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, transparent 50%, rgba(0,0,0,0.1) 60%, transparent 70%, rgba(0,0,0,0.1) 80%, transparent 85%, rgba(0,0,0,0.1) 90%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        /* Header title */
+        .wedding-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 5rem;
+            color: #e91e63;
+            text-shadow: 0 0 8px rgba(233, 30, 99, 0.6);
+            position: relative;
+            display: inline-block;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        .wedding-title-part2 {
+            display: block;
+            padding-left: 4rem; /* Aligns "Đám" with "Mừng" */
+        }
+        .wedding-names {
+            font-family: 'Lora', serif;
+            font-size: 2.8rem;
+            color: #333;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        /* Sparkle effect for wedding-title only */
+        .title-sparkle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 70%);
+            border-radius: 50%;
+            animation: sparkle 1.5s infinite;
+        }
+        /* Happy Wedding highlight */
+        .happy-wedding {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            color: #ffd700;
+            text-shadow: 0 0 6px rgba(255, 215, 0, 0.8);
+            border: 1px solid #ffcccb;
+            padding: 2px 6px;
+            border-radius: 6px;
+            animation: pulse 2s infinite ease-in-out;
+            transition: transform 0.3s ease;
+        }
+        .happy-wedding:hover {
+            transform: translateY(-2px);
+        }
+        .happy-wedding-sparkle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 70%);
+            border-radius: 50%;
+            animation: sparkle 1.2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        @keyframes sparkle {
+            0% { transform: scale(0); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0.5; }
+            100% { transform: scale(0); opacity: 0; }
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center">
+    <!-- Floating hearts -->
+    <div class="heart" style="left: 10%; top: 90%"></div>
+    <div class="heart" style="left: 30%; top: 80%; animation-delay: 1s;"></div>
+    <div class="heart" style="left: 50%; top: 85%; animation-delay: 2s;"></div>
+    <div class="heart" style="left: 70%; top: 95%; animation-delay: 3s;"></div>
+    <div class="heart" style="left: 90%; top: 88%; animation-delay: 4s;"></div>
+
+    <div class="max-w-2xl mx-auto bg-white shadow-2xl rounded-lg p-8 m-4" data-aos="fade-up">
+        <!-- Header -->
+        <div class="text-center mb-6">
+            <h1 class="wedding-title" data-aos="fade-up" data-aos-delay="100">
+                <span>Chúc Mừng</span>
+                <span class="wedding-title-part2">Đám Cưới</span>
+                <span class="title-sparkle" style="top: -5px; left: 5%; animation-delay: 0s;"></span>
+                <span class="title-sparkle" style="top: 50%; left: 95%; animation-delay: 0.5s;"></span>
+                <span class="title-sparkle" style="top: 80%; left: 10%; animation-delay: 1s;"></span>
+            </h1>
+            <h2 class="wedding-names mt-4" data-aos="fade-up" data-aos-delay="200">
+                THÀNH LUÂN & TƯỜNG DUY
+            </h2>
+        </div>
+
+        <!-- Vinyl Record -->
+        <div class="text-center mb-6" data-aos="fade-up" data-aos-delay="250">
+            <div class="vinyl-container">
+                <div class="vinyl" id="vinyl"></div>
+            </div>
+            <p class="text-sm text-gray-500 mt-2">Nhấn vào đĩa nhạc để nghe lời chúc âm nhạc!</p>
+            <audio id="weddingMusic" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+        </div>
+
+        <!-- Wedding Info -->
+        <div class="text-center mb-6" data-aos="fade-up" data-aos-delay="300">
+            <p class="text-lg text-gray-700">Chủ nhật, ngày <span class="font-bold">19/10/2025</span></p>
+            <p class="text-lg text-gray-700">Lúc <span class="font-bold">7:00 tối</span></p>
+        </div>
+
+        <!-- Message -->
+        <div class="text-center mb-8" data-aos="fade-up" data-aos-delay="400">
+            <p class="text-gray-600 italic leading-relaxed">
+                Chúc mừng 2 đứa, chúc 2 đứa trăm năm hạnh phúc! Dì Huỳnh bận việc học nên không kịp về chung vui với 2 đứa, thông cảm cho Dì nhaaa! Mong rằng sau này 2 đứa sẽ mãi yêu thương nhau, cùng nhau bước tiếp, dù cho cuộc sống có khó khăn, thử thách thì cũng phải cùng nhau vượt qua nhé. Chúc mừng chú rể và cô dâu đẹp nhất của ngày hôm nay. 
+                <span class="happy-wedding" id="happyWedding">
+                    Happy Wedding!
+                    <span class="happy-wedding-sparkle" style="top: -5px; left: 10%; animation-delay: 0s;"></span>
+                    <span class="happy-wedding-sparkle" style="top: 50%; left: 90%; animation-delay: 0.4s;"></span>
+                    <span class="happy-wedding-sparkle" style="top: 80%; left: 20%; animation-delay: 0.8s;"></span>
+                </span>
+            </p>
+        </div>
+
+        <!-- Transfer Image -->
+        <div class="text-center" data-aos="fade-up" data-aos-delay="500">
+            <img src="https://via.placeholder.com/400x200?text=Hình+Chuyển+Khoản" alt="Hình chuyển khoản" class="w-full max-w-md mx-auto rounded-lg shadow-md">
+            <p class="text-sm text-gray-500 mt-2">Hình ảnh chuyển khoản mừng cưới từ Dì Huỳnh</p>
+        </div>
+    </div>
+
+    <!-- Initialize AOS, Handle Vinyl Record, and Confetti -->
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        // Dynamic heart generation
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.style.left = `${Math.random() * 100}%`;
+            heart.style.top = `${80 + Math.random() * 20}%`;
+            heart.style.animationDelay = `${Math.random() * 4}s`;
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 6000);
+        }
+
+        setInterval(createHeart, 1000);
+
+        // Vinyl record play/pause
+        const vinyl = document.getElementById('vinyl');
+        const audio = document.getElementById('weddingMusic');
+        let isPlaying = false;
+
+        vinyl.addEventListener('click', () => {
+            if (isPlaying) {
+                audio.pause();
+                vinyl.classList.remove('playing');
+            } else {
+                audio.play();
+                vinyl.classList.add('playing');
+            }
+            isPlaying = !isPlaying;
+        });
+
+        // Stop spinning when audio ends
+        audio.addEventListener('ended', () => {
+            vinyl.classList.remove('playing');
+            isPlaying = false;
+        });
+
+        // Confetti effect on Happy Wedding click
+        const happyWedding = document.getElementById('happyWedding');
+        happyWedding.addEventListener('click', () => {
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.1 },
+                colors: ['#ff69b4', '#ffd700', '#ffffff']
+            });
+        });
+    </script>
+</body>
+</html>
